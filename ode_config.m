@@ -1,4 +1,4 @@
-function [ options ] = odeconfig( varargin )
+function [ options ] = ode_config( varargin )
 %Set the config of ode solver
 %Input:
 %       
@@ -8,7 +8,7 @@ function [ options ] = odeconfig( varargin )
 %       RelTol: relative tolerence
 %       FixStepMethod: method used in fixed step method
 %           Euler: Euler  method (1st order)
-%           Trap: Trapezoid method £¨2nd order£©
+%           Trap: Trapezoid method Â£Â¨2nd orderÂ£Â©
 %           RK4: Runge-Kutta method (4th order)
 
 %Error trapping:
