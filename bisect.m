@@ -1,23 +1,26 @@
 function [varargout] = bisect(varargin)
-%Bisection method by Wang Xiao 8.10.2018
-%Input:
-%(f,a,b) or (f,a,b,Tol) or (f,a,b,Tol,N)
-%       f:The function of f(x)=0
-%       a:left border of guess
-%       b:right border of guess
-%       Tol:tolerence of absolute error (optional)
-%       N:the maximun number of iteration (optional)
-%Output:
-%       xc:The approximation of zero
-%       iter:Struct shows the process of the iteration
-%           iter.N times of iteration
-%           iter.zero approximation zero in each iteration
-%           iter.Xerror: xerror |xn-xn-1| in each iteration
-%           iter.Xerror: yerror |f(xn)| in each iteration
+%{
+Bisection method by Wang Xiao 8.10.2018
+Input:
+(f,a,b) or (f,a,b,Tol) or (f,a,b,Tol,N)
+        f:The function of f(x)=0
+        a:left border of guess
+        b:right border of guess
+        Tol:tolerence of absolute error (optional)
+        N:the maximun number of iteration (optional)
+Output:
+(xc) or (xc,iter)
+        xc:The approximation of zero
+        iter:Struct shows the process of the iteration
+            iter.N times of iteration
+            iter.zero approximation zero in each iteration
+            iter.Xerror: xerror |xn-xn-1| in each iteration
+            iter.Xerror: yerror |f(xn)| in each iteration
+%}
 
 %defaultsettings
 Tol=1e-8;
-N=1000;
+N=100;
 
 %process input
 if(~(nargout==1||nargout==2))
@@ -55,17 +58,15 @@ i=1;
 while(i<=N)
    c(i)=(a+b)/2;
    FP(i)=f(c(i));
-   if(FP(i)==0)
+   xerror(i)=abs(b-a)/2;
+   if(FP(i)==0 || xerror(i)<Tol)
        break;
    end
+   
    if(FP(i)*f(a)<0)
        b=c(i);
    elseif(FP(i)*f(b)<0)
        a=c(i);
-   end
-   xerror(i)=abs(b-a);
-   if(xerror(i)<Tol)
-       break;
    end
    i=i+1;
 end
