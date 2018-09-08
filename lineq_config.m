@@ -1,4 +1,4 @@
-function [ options ] = lineqconfig( varargin )
+function [ options ] = lineq_config( varargin )
 %Set the config of linear equation solver
 %Input:
 %       
